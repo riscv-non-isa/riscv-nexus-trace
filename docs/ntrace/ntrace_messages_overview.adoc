@@ -5,6 +5,7 @@ IMPORTANT: The terminology `Indirect Branch` as used by the IEEE-5001 Nexus Stan
 // [#Fields in Messages]
 [[sec_Fields_in_Messages]]
 === Fields in Messages
+
 The table presented below enumerates all message types that can be generated, with each row comprehensively defining the fields associated with a particular message type. Fields that are present in different messages are consistently ordered.
 
 Message field attributes are described using the following terminology:
@@ -81,6 +82,7 @@ NOTE: Reference code is using plain C-style identifiers, so the field name as *B
 
 [[sec_Common_Fields]]
 === Common Fields
+
 The table below provides details for fields which are used in more than one message type. Fields which are present in only one message are described with each message. 
 
 .Details of Common Fields

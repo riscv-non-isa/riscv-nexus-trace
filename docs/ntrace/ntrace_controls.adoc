@@ -1,5 +1,6 @@
 [[sec_N-Trace_Specific_Trace_Controls]]
 == N-Trace Specific Trace Controls
+
 This chapter describes how fields and bits from Trace Encoder control registers (named using *trTe...* pattern) are influencing N-Trace encoder and N-Trace protocol messages. N-Trace specific clarifications, in addition to description in xref:ntrace_introduction.adoc#RISC-V_Trace_Control_Interface[RISC-V Trace Control Interface] specification are provided. 
 
 NOTE: The table below does not provide names of Trace Encoder control registers as names of bits/fields used in Trace Control Interface are unique.

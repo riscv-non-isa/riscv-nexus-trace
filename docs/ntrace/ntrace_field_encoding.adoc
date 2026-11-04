@@ -4,6 +4,7 @@ This chapter describes in detail how key fields (I-CNT, HIST, U-ADDR/F-ADDR and 
 
 [[sec_Address_Compression]]
 === Address Compression
+
 Address transmissions is compliant with the IEEE-5001 Nexus Standard (most significant bit 0-s skipped) with optional extension allowing to skip identical most significant bits. See xref:ntrace_optimizations.adoc#sec_Virtual_Addresses_Optimization[ Virtual Addresses Optimization] chapter below for clarifications.
 
 Rules when generating addresses:
@@ -34,6 +35,7 @@ Rules when generating addresses:
 <<<
 [[sec_HIST_Field_Generation]]
 === HIST Field Generation
+
 When operating in HTM mode, the encoder does not generate messages for conditional branches.
 Instead, it maintains a HIST register or accumulator to record the outcomes of these branches, whether taken or not-taken.
 Each conditional branch contributes a single bit to the HIST register, as follows:
@@ -67,6 +69,7 @@ register.
 
 [[sec_HIST_Field_Full]]
 ==== HIST Field Full
+
 The transition of the most significant bit in the HIST register from 0 to 1 indicates the register is full. At this point, the
 entire register, including the most significant bit — which serves as the stop-bit — is transmitted
 using a xref:ntrace_messages_details.adoc#msg2_ResourceFull[ResourceFull] message with the xref:ntrace_messages_details.adoc#field_RCODE[RCODE] field set to either 1 or 2.
@@ -82,6 +85,7 @@ NOTE: Trace decoders do not have to be aware about the actual size of the HIST f
 <<<
 [[sec_I-CNT_Details]]
 === I-CNT Details
+
 The I-CNT field, present in most messages, transmits the value of the I-CNT counter, which counts the number of halfwords used to encode retired instructions.
 
 The I-CNT counter in the trace encoder is reset to 0, in accordance with the IEEE-5001 Nexus Standard, under one of the following two conditions:
@@ -226,6 +230,7 @@ Trace with *SYNC=Sequential Instruction Counter* (BTM mode only):
 <<<
 [[sec_Synchronizing_Messages]]
 === Synchronizing Messages
+
 Synchronizing messages are messages with a xref:ntrace_messages_overview.adoc#field_SYNC[SYNC] field.
 That field identifies the reason for synchronization and such messages include the xref:ntrace_messages_overview.adoc#field_F-ADDR[F-ADDR] (full address) field to synchronize the PC with the PC observed by the encoder.
 
@@ -315,6 +320,7 @@ image::case6_periodic.PNG[]
 <<<
 [[sec_Timestamp_Reporting]]
 === Timestamp Reporting
+
 Timestamp reporting must be enabled by xref:ntrace_controls.adoc#trTsEnable[trTsEnable] trace control bit.
 
 If timestamp is enabled, all xref:ntrace_field_encoding.adoc#sec_Synchronizing_Messages[Synchronizing Messages] include an absolute timestamp value with upper zeroes suppressed. Other message types with timestamp emit the timestamp as relative offset from last reported (absolute or relative) timestamp.
