@@ -18,34 +18,34 @@ instructions, thereby requiring their occurrences to be traced.
 
 *Detailed Rules*
 
-. If tracing is started (or restarted after it was disabled), a <<msg_ProgTraceSync,ProgTraceSync>> message is generated.
-** This message specifies the reason for the start in the <<field_SYNC,SYNC>> field and includes full address in the <<field_F-ADDR,F-ADDR>> field.
-. A retired 16-bit instruction increments the <<field_I-CNT,I-CNT>> counter by 1, while a retired 32-bit instruction increments it by 2.
+. If tracing is started (or restarted after it was disabled), a xref:ntrace_messages_overview.adoc#msg_ProgTraceSync[ProgTraceSync] message is generated.
+** This message specifies the reason for the start in the xref:ntrace_messages_overview.adoc#field_SYNC[SYNC] field and includes full address in the xref:ntrace_messages_overview.adoc#field_F-ADDR[F-ADDR] field.
+. A retired 16-bit instruction increments the xref:ntrace_messages_overview.adoc#field_I-CNT[I-CNT] counter by 1, while a retired 32-bit instruction increments it by 2.
 . The following types of instructions allow trace decoders to determine the next PC and encoder should not generate any trace for them.
 ** Instruction which is not control transfer instructions should advance PC to the next instruction (increment by 2 or 4).
 ** Direct (inferable) unconditional jump should set next PC to jump destination (PC plus an offset obtained from opcode).
 ** Not-taken direct conditional branch (in BTM mode) should advance PC to the next instruction (increment by 2 or 4).
 . Indirect, unconditional jump instruction is handled as:
-** In BTM mode, an <<msg2_IndirectBranch,IndirectBranch>> message is generated.
-** In HTM mode, an <<msg2_IndirectBranchHist,IndirectBranchHist>> message is generated. Should the <<field_HIST,HIST>> field be empty, an <<msg2_IndirectBranch,IndirectBranch>> message may optionally be generated instead.
+** In BTM mode, an xref:ntrace_messages_details.adoc#msg2_IndirectBranch[IndirectBranch] message is generated.
+** In HTM mode, an xref:ntrace_messages_details.adoc#msg2_IndirectBranchHist[IndirectBranchHist] message is generated. Should the xref:ntrace_messages_overview.adoc#field_HIST[HIST] field be empty, an xref:ntrace_messages_details.adoc#msg2_IndirectBranch[IndirectBranch] message may optionally be generated instead.
 . Direct, conditional branch instruction is handled as:
-** In BTM mode, a <<msg_DirectBranch,DirectBranch>> message is generated, but only if the branch is taken.
-** In HTM mode, the outcome of the branch (1 for taken or 0 for not taken) is appended as a single bit into the branch history buffer (<<field_HIST,HIST>> register).
-. When tracing is stopped or disabled, a <<msg_ProgTraceCorrelation,ProgTraceCorrelation>> message is generated.
-** This message included a reason for stopping or disabling (specified in the <<field_EVCODE,EVCODE>> field), the <<field_I-CNT,I-CNT>> and an optional <<field_HIST,HIST>> field. These details allow for the calculation of the last PC. 
-. When a generated message includes <<field_I-CNT,I-CNT>> counter value or <<field_HIST,HIST>> register value, the corresponding counter and/or register are reset.
-** If the I-CNT counter is full, a <<msg_ResourceFull,ResourceFull>> message, indicating that I-CNT counter is full, is generated. Subsequently, the I-CNT is reset.
-** Similarily, if the HIST register reaches it capacity, a <<msg_ResourceFull,ResourceFull>> message, specifying that the HIST register is full, is generated. The HIST register is then reset.
+** In BTM mode, a xref:ntrace_messages_overview.adoc#msg_DirectBranch[DirectBranch] message is generated, but only if the branch is taken.
+** In HTM mode, the outcome of the branch (1 for taken or 0 for not taken) is appended as a single bit into the branch history buffer (xref:ntrace_messages_overview.adoc#field_HIST[HIST] register).
+. When tracing is stopped or disabled, a xref:ntrace_messages_overview.adoc#msg_ProgTraceCorrelation[ProgTraceCorrelation] message is generated.
+** This message included a reason for stopping or disabling (specified in the xref:ntrace_messages_details.adoc#field_EVCODE[EVCODE] field), the xref:ntrace_messages_overview.adoc#field_I-CNT[I-CNT] and an optional xref:ntrace_messages_overview.adoc#field_HIST[HIST] field. These details allow for the calculation of the last PC. 
+. When a generated message includes xref:ntrace_messages_overview.adoc#field_I-CNT[I-CNT] counter value or xref:ntrace_messages_overview.adoc#field_HIST[HIST] register value, the corresponding counter and/or register are reset.
+** If the I-CNT counter is full, a xref:ntrace_messages_overview.adoc#msg_ResourceFull[ResourceFull] message, indicating that I-CNT counter is full, is generated. Subsequently, the I-CNT is reset.
+** Similarily, if the HIST register reaches it capacity, a xref:ntrace_messages_overview.adoc#msg_ResourceFull[ResourceFull] message, specifying that the HIST register is full, is generated. The HIST register is then reset.
 
 *Extended Rules*
 
 These rules are augmenting the above rules if the corresponding configuration setting is set.
 
-. Call and return instructions may optionally be handled as described in the <<Implicit Return Optimization,Implicit Return Optimization>> chapter and may generate no trace.
+. Call and return instructions may optionally be handled as described in the xref:ntrace_optimizations.adoc#sec_Implicit_Return_Optimization[Implicit Return Optimization] chapter and may generate no trace.
 . By default, the target of an indirect unconditional jump is always considered an uninferable PC discontinuity. However, if the register that specifies the jump target was loaded with a constant
 then it can be considered inferable under some circumstances. 
 ** Such instruction sequences may be detected and in such a case no trace is generated.
-** This optional feature is described in detail in the <<Sequential Jump Optimization,Sequential Jump Optimization>> chapter.
+** This optional feature is described in detail in the xref:ntrace_optimizations.adoc#sec_Sequential_Jump_Optimization[Sequential Jump Optimization] chapter.
 
 === Custom Instructions
 

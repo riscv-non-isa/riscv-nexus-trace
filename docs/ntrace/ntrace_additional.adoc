@@ -2,7 +2,7 @@
 
 *Trace Bandwidth Considerations*
 
-SRC field (if enabled) may change the otherwise optimal layout of <<Fields in Messages,Fields in Messages>>.
+SRC field (if enabled) may change the otherwise optimal layout of xref:ntrace_messages_overview.adoc#sec_Fields_in_Messages[Fields in Messages].
 
 *Validation Considerations*
 
