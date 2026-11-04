@@ -11,27 +11,27 @@ The modes and behavior described here are intended to be compatible with trace p
 |===
 |*Bit* |*Field* |*Description* |*RW* |*Reset*
 |0 |trPibActive |Primary activate/reset bit for PIB Sink component. When 0, the PIB Sink may have clocks gated off or be powered
-down, and other register locations may be inaccessible. Hardware may take an arbitrarily long time to process power-up and power-down and will indicate completion when the read value of this bit matches what was written. See <<Reset and Discovery,Reset and Discovery>> chapter for more details.|RW|0
+down, and other register locations may be inaccessible. Hardware may take an arbitrarily long time to process power-up and power-down and will indicate completion when the read value of this bit matches what was written. See xref:tci_additional.adoc#sec_Reset_and_Discovery[Reset and Discovery] chapter for more details.|RW|0
 |1 |trPibEnable |
 *0:* PIB does not accept input but holds output(s) at idle state defined by pibMode. +
 *1:* Enable PIB to generate output. +
- See <<Enabling and Disabling,Enabling and Disabling>> chapter for more details.
+ See xref:tci_additional.adoc#sec_Enabling_and_Disabling[Enabling and Disabling] chapter for more details.
 |RW|0
 |2 |--|Reserved|--|0
 |3 |trPibEmpty |Reads 1 when PIB internal buffers are empty.|RO|1
-|7:4 |trPibMode |Select mode for output pins. Allowed values are described in the `Allowed PIB Configurations` table below.|WARL|<<Undef,Undef>>
-|8 |trPibClkCenter |In parallel modes, adjust TRC_CLK timing to the center of the bit period. This can be set only if `trPibMode` selects one of the parallel protocols.|WARL|<<Undef,Undef>>
-|9 |trPibCalibrate |Set this to 1 to generate a repeating calibration pattern to help tune a probe's signal delays, bit rate, etc. In this mode input to the sink is not consumed. The calibration pattern is described below.|WARL|<<Undef,Undef>>
+|7:4 |trPibMode |Select mode for output pins. Allowed values are described in the `Allowed PIB Configurations` table below.|WARL|xref:tci_introduction.adoc#Undef[Undef]
+|8 |trPibClkCenter |In parallel modes, adjust TRC_CLK timing to the center of the bit period. This can be set only if `trPibMode` selects one of the parallel protocols.|WARL|xref:tci_introduction.adoc#Undef[Undef]
+|9 |trPibCalibrate |Set this to 1 to generate a repeating calibration pattern to help tune a probe's signal delays, bit rate, etc. In this mode input to the sink is not consumed. The calibration pattern is described below.|WARL|xref:tci_introduction.adoc#Undef[Undef]
 |11:10 |--|Reserved|--|0
 |14:12 |trPibAsyncFreq |
 *0:* Alignment synchronization (Async) packets disabled (may be the only choice for some protocols) +
 *1-7:* Different levels of alignment synchronization (bigger number, bigger distance). +
 Details should be defined in the specification of each trace protocol.
-|WARL|<<Undef,Undef>>
+|WARL|xref:tci_introduction.adoc#Undef[Undef]
 |15 |--|Reserved|--|0
 |31:16 |trPibDivider |Timebase selection for the PIB module. The input clock is divided by `trPibDivider` + 1. PIB data is sent at either this divided rate or 1/2 of this rate, depending on `trPibMode`. Width is implementation dependent. 
 After the PIB reset value of this field should be set to safe (not too fast clock) setting for a particular SoC. Trace tools may set smaller values to utilize higher bandwidth. 
-|WARL|<<Undef,Undef>> 
+|WARL|xref:tci_introduction.adoc#Undef[Undef] 
 |===
 
 <<<
@@ -43,7 +43,7 @@ After the PIB reset value of this field should be set to safe (not too fast cloc
 |7:4 |trPibVerMinor |Trace PIB Sink Component Minor Version. Value 0 means the component is compliant with this document. |RO|0
 |11:8 |trPibCompType |Trace PIB Sink Component Type (PIB Sink) |RO|0xA
 |23:12 |--|Reserved for future versions of this standard|--|0
-|31:24 |--|Reserved for vendor specific implementation details|--|<<SD,SD>>
+|31:24 |--|Reserved for vendor specific implementation details|--|xref:tci_introduction.adoc#SD[SD]
 |===
 
 Software can determine what modes are available by attempting to write each mode setting to the WARL field `trPibMode` and reading back to see if the value was accepted.

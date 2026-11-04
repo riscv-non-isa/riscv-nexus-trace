@@ -7,12 +7,12 @@ Some SoCs may have an Advanced Trace Bus (ATB) infrastructure to manage trace pr
 |===
 |*Bit* |*Field* |*Description* |*RW* |*Reset*
 |0 |trAtbBridgeActive |Primary activate/reset for the ATB Bridge. When 0, the ATB Bridge may have clocks gated off or be powered
-down, and other register locations may be inaccessible. Hardware may take an arbitrarily long time to process power-up and power-down and will indicate completion when the read value of this bit matches what was written. See <<Reset and Discovery,Reset and Discovery>> chapter for more details.|RW|0
-|1 |trAtbBridgeEnable |*1:* ATB Bridge enabled. Setting `trAtbBridgeEnable` to 0 flushes any queued trace data to ATB. See <<Enabling and Disabling,Enabling and Disabling>> chapter for more details.|RW|0
+down, and other register locations may be inaccessible. Hardware may take an arbitrarily long time to process power-up and power-down and will indicate completion when the read value of this bit matches what was written. See xref:tci_additional.adoc#sec_Reset_and_Discovery[Reset and Discovery] chapter for more details.|RW|0
+|1 |trAtbBridgeEnable |*1:* ATB Bridge enabled. Setting `trAtbBridgeEnable` to 0 flushes any queued trace data to ATB. See xref:tci_additional.adoc#sec_Enabling_and_Disabling[Enabling and Disabling] chapter for more details.|RW|0
 |2 |--|Reserved|--|0
 |3 |trAtbBridgeEmpty |Reads 1 when ATB Bridge internal buffers are empty |RO|1
 |7:4 |--|Reserved|--|0
-|14:8 |trAtbBridgeID |ID of this node on ATB. Values of 0x00 and 0x70-0x7F are reserved by the ATB specification and should not be used. |RW|<<Undef,Undef>>
+|14:8 |trAtbBridgeID |ID of this node on ATB. Values of 0x00 and 0x70-0x7F are reserved by the ATB specification and should not be used. |RW|xref:tci_introduction.adoc#Undef[Undef]
 |31:15 |--|Reserved|--|0
 |===
 
@@ -27,9 +27,9 @@ down, and other register locations may be inaccessible. Hardware may take an arb
 *0:* Alignment synchronization (Async) packets disabled (may be the only choice for some protocols) +
 *1-7:* Different levels of alignment synchronization (bigger number, bigger distance). +
 Details should be defined the specification of each trace protocol.
-|WARL|<<Undef,Undef>>
+|WARL|xref:tci_introduction.adoc#Undef[Undef]
 |23:15 |--|Reserved for future versions of this standard|--|0
-|31:24 |--|Reserved for vendor specific implementation details|--|<<SD,SD>>
+|31:24 |--|Reserved for vendor specific implementation details|--|xref:tci_introduction.adoc#SD[SD]
 |===
 
 An implementation determines the data widths of the connection from the Trace Encoder or Trace Funnel and of the ATB port.
