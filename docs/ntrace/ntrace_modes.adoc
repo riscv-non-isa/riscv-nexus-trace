@@ -19,5 +19,5 @@ Above modes correspond to the following IEEE-5001 Nexus Standard instruction tra
 * *Branch Trace Messaging using Branch History Messages*
 ====
 
-IMPORTANT: The IEEE-5001 Nexus Standard defines different conformance levels. These levels are not directly applicable to N-Trace as Nexus levels always include debug levels. Different N-Trace options are provided in <<N-Trace Specific Trace Controls,N-Trace Specific Trace Controls>> chapter.
+IMPORTANT: The IEEE-5001 Nexus Standard defines different conformance levels. These levels are not directly applicable to N-Trace as Nexus levels always include debug levels. Different N-Trace options are provided in xref:ntrace_controls.adoc#sec_N-Trace_Specific_Trace_Controls[N-Trace Specific Trace Controls] chapter.
 

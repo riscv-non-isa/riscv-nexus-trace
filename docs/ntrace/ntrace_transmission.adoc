@@ -1,3 +1,4 @@
+[[sec_N-Trace_Transmission_Protocol]]
 == N-Trace Transmission Protocol
 
 The IEEE-5001 Nexus Standard defines a trace messaging protocol using several *MDO* (Message Data Out) signals and one or two flag signals known as *MSEO* (Message Start/End Out). A Nexus message is sent or stored in a record composed of *MDO* and *MSEO*. 
@@ -23,7 +24,7 @@ N-Trace message transmission protocol is a strict subset of IEEE-5001 Nexus Stan
 |====
 
 The maximum standard message size of 38 bytes in this version of the specification is
- to transmit <<msg_IndirectBranchHistSync,IndirectBranchHistSync>> message which includes TCODE/ SRC/ SYNC/ B-TYPE(5 bytes total), I-CNT(30 bits, 5 bytes), F-ADDR(63 bits, 11 bytes), HIST(32 bits, 6 bytes) TSTAMP(64 bits, 11 bytes).
+ to transmit xref:ntrace_messages_overview.adoc#msg_IndirectBranchHistSync[IndirectBranchHistSync] message which includes TCODE/ SRC/ SYNC/ B-TYPE(5 bytes total), I-CNT(30 bits, 5 bytes), F-ADDR(63 bits, 11 bytes), HIST(32 bits, 6 bytes) TSTAMP(64 bits, 11 bytes).
 
 While implementations may have a shorter maximum message size (e.g. due to I-CNT being smaller), they must assure that the internal FIFOs are designed to hold at least two maximum sized messages that the implementation can produce.
 
@@ -98,9 +99,10 @@ Order of bits and bytes:
 
 NOTE: Above rules allow receiving trace probes to skip idle messages.
 
+[[sec_PIB_Idle_Cycles_Explained]]
 === PIB Idle Cycles Explained
 
-This chapter describes N-Trace specific details about the transmission via a Pin Interface Block (PIB), as it is described in the <<RISC-V_Trace_Control_Interface,RISC-V Trace Control Interface>> Specification.
+This chapter describes N-Trace specific details about the transmission via a Pin Interface Block (PIB), as it is described in the xref:ntrace_introduction.adoc#RISC-V_Trace_Control_Interface[RISC-V Trace Control Interface] Specification.
 
 Trace messages may start on any (positive or negative) edge of trace clock. 
 
