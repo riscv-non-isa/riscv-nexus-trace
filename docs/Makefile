@@ -13,7 +13,7 @@
 # the Doc Template for RISC-V Extensions.
 
 DOCKER_RUN := docker run --rm -v ${PWD}:/build -w /build \
-riscvintl/riscv-docs-base-container-image:latest
+ghcr.io/riscv/riscv-docs-base-container-image:latest
 
 ASCIIDOCTOR_PDF := asciidoctor-pdf
 OPTIONS := --trace \
